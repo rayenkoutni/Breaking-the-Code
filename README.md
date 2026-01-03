@@ -1,70 +1,138 @@
-# Getting Started with Create React App
+# Mini Project 1 – Breaking the Code  
+## Automatic Cryptanalysis of a Mono-Alphabetic (Caesar) Cipher
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
+## 1. Project Overview
 
-In the project directory, you can run:
+This project is part of **Mini Project 1 – Breaking the Code** in the *Computer Security* course.  
+The objective is to design an **automatic cryptanalysis system** capable of analyzing a message encrypted with a **mono-alphabetic Caesar cipher**, **without any prior knowledge of the key**, and to automatically recover the **most plausible plaintext**.
 
-### `npm start`
+The project places the student in the role of a **cybersecurity analyst**, whose task is to test, evaluate, and compare multiple decryption hypotheses in order to make an automatic and justified decision.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 2. Educational Objectives
 
-### `npm test`
+The project aims to demonstrate the ability to:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- analyze an encrypted message without knowing the key,
+- generate multiple decryption hypotheses,
+- evaluate the linguistic quality of each hypothesis,
+- automatically select the most credible plaintext,
+- structure and document code clearly,
+- explain the system and its logic in a concise way.
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 3. Scope and Constraints
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- The project strictly follows the **mini-project specifications**.
+- No encryption mechanism is exposed to the user.
+- The decryption key is **never provided by the user**.
+- All experiments are **local and pedagogical**.
+- The web application is used **only as a demonstration interface**.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 4. Working Principle
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+The system operates according to the following steps:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. The user provides a ciphertext.
+2. All possible Caesar cipher shifts (keys 0 to 25) are tested automatically.
+3. Each candidate plaintext is evaluated using linguistic criteria.
+4. The hypotheses are ranked according to their plausibility.
+5. The most credible plaintext is selected and returned.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 5. Project Architecture
 
-## Learn More
+project/
+│
+├── cryptanalyse.py # Decryption hypothesis generation
+├── evaluation.py # Linguistic evaluation of hypotheses
+├── main.py # Orchestration and local API (Flask)
+│
+└── web-app/ # User interface (React)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Component Roles
 
-### Code Splitting
+- **cryptanalyse.py**  
+  Generates all possible decryption hypotheses by testing every Caesar shift without prior knowledge of the key.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- **evaluation.py**  
+  Evaluates the linguistic plausibility of each hypothesis using heuristic scoring.
 
-### Analyzing the Bundle Size
+- **main.py**  
+  Coordinates the cryptanalysis process and exposes a local HTTP endpoint for the web interface.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- **web-app (React)**  
+  Serves only as an input/output interface for demonstration purposes.
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 6. Technologies Used
 
-### Advanced Configuration
+- Python 3  
+- Flask  
+- Flask-CORS  
+- React  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+## 7. Running the Project
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Backend (Python)
 
-### `npm run build` fails to minify
+pip install flask flask-cors
+python main.py
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The server runs locally at:
+
+http://localhost:5000
+
+Frontend (React)
+npm install
+npm start
+
+
+The web application is available at:
+
+http://localhost:3000
+
+8. Example Test
+
+Ciphertext input:
+
+oh vhfxulwh lqirupdwltxh hvw lpsruwdqwh gdqv oh prqgh prghuqh.
+
+
+Expected behavior:
+
+Correct plaintext recovery
+
+Automatic key detection
+
+High linguistic score
+
+9. Delivered Work
+
+The submission includes:
+
+Structured and commented source code
+
+An explanatory video (3–6 minutes) presenting:
+
+the project objective,
+
+a live demonstration,
+
+the cryptanalysis logic.
+
+## 10. Conclusion
+
+This project demonstrates an automated approach to breaking a mono-alphabetic Caesar cipher.
+It highlights the role of linguistic analysis and automated decision-making in computer security, while strictly respecting the pedagogical and ethical framework of the course.
